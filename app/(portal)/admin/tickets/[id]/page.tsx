@@ -1,3 +1,4 @@
+import Select from "@/app/components/select";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -54,13 +55,13 @@ export default async function AdminTicketPage({ params, searchParams }: PageProp
                 </label>
                 <label className="field field-inline">
                   <span>Status danach</span>
-                  <select name="next_status" defaultValue="wartet_auf_kunde">
+                  <Select name="next_status" defaultValue="wartet_auf_kunde">
                     {Object.entries(ticketStatusAdmin).map(([v, l]) => (
                       <option key={v} value={v}>
                         {l}
                       </option>
                     ))}
-                  </select>
+                  </Select>
                 </label>
               </div>
               <div className="form-actions">
@@ -75,44 +76,44 @@ export default async function AdminTicketPage({ params, searchParams }: PageProp
               <input type="hidden" name="ticket_id" value={ticket.id} />
               <label className="field">
                 <span>Status</span>
-                <select name="status" defaultValue={ticket.status}>
+                <Select name="status" defaultValue={ticket.status}>
                   {Object.entries(ticketStatusAdmin).map(([v, l]) => (
                     <option key={v} value={v}>
                       {l}
                     </option>
                   ))}
-                </select>
+                </Select>
               </label>
               <label className="field">
                 <span>Priorität</span>
-                <select name="priority" defaultValue={ticket.priority}>
+                <Select name="priority" defaultValue={ticket.priority}>
                   {Object.entries(ticketPriority).map(([v, l]) => (
                     <option key={v} value={v}>
                       {l}
                     </option>
                   ))}
-                </select>
+                </Select>
               </label>
               <label className="field">
                 <span>Kategorie</span>
-                <select name="category" defaultValue={ticket.category}>
+                <Select name="category" defaultValue={ticket.category}>
                   {Object.entries(ticketCategory).map(([v, l]) => (
                     <option key={v} value={v}>
                       {l}
                     </option>
                   ))}
-                </select>
+                </Select>
               </label>
               <label className="field">
                 <span>Zuständig</span>
-                <select name="assignee_id" defaultValue={ticket.assignee_id ?? ""}>
+                <Select name="assignee_id" defaultValue={ticket.assignee_id ?? ""}>
                   <option value="">Niemand</option>
                   {admins.map((a) => (
                     <option key={a.id} value={a.id}>
                       {a.name}
                     </option>
                   ))}
-                </select>
+                </Select>
               </label>
               <SubmitButton className="btn btn-primary btn-block">Übernehmen</SubmitButton>
             </form>

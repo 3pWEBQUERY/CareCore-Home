@@ -1,3 +1,4 @@
+import Select from "@/app/components/select";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -66,14 +67,14 @@ export default async function AdminOrderPage({ params, searchParams }: PageProps
                 <input type="hidden" name="order_id" value={order.id} />
                 <label className="field">
                   <span>Produkt (optional)</span>
-                  <select name="product_id" defaultValue="">
+                  <Select name="product_id" defaultValue="">
                     <option value="">Freie Position</option>
                     {products.map((p) => (
                       <option key={p.id} value={p.id}>
                         {p.name} – {money(p.price_cents)} / {p.unit}
                       </option>
                     ))}
-                  </select>
+                  </Select>
                 </label>
                 <label className="field">
                   <span>Beschreibung (leer = Produktname)</span>
@@ -86,12 +87,12 @@ export default async function AdminOrderPage({ params, searchParams }: PageProps
                   </label>
                   <label className="field">
                     <span>Einheit</span>
-                    <select name="unit" defaultValue="">
+                    <Select name="unit" defaultValue="">
                       <option value="">wie Produkt</option>
                       {units.map((u) => (
                         <option key={u}>{u}</option>
                       ))}
-                    </select>
+                    </Select>
                   </label>
                   <label className="field">
                     <span>Preis CHF (leer = Produkt)</span>
@@ -120,13 +121,13 @@ export default async function AdminOrderPage({ params, searchParams }: PageProps
               <input type="hidden" name="order_id" value={order.id} />
               <label className="field">
                 <span>Status</span>
-                <select name="status" defaultValue={order.status}>
+                <Select name="status" defaultValue={order.status}>
                   {Object.entries(orderStatus).map(([v, l]) => (
                     <option key={v} value={v}>
                       {l}
                     </option>
                   ))}
-                </select>
+                </Select>
               </label>
               <label className="field">
                 <span>Interne Notiz</span>

@@ -1,3 +1,4 @@
+import Select from "@/app/components/select";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Badge, Card, Empty, Flash, PageHeader } from "@/app/components/ui";
@@ -28,14 +29,14 @@ export default async function AdminOrdersPage({ searchParams }: PageProps<"/admi
       <Flash params={params} />
       <form className="filters" role="search">
         <input name="q" defaultValue={q} placeholder="Suche: Kunde, Nummer" aria-label="Suche" />
-        <select name="status" defaultValue={status} aria-label="Status">
+        <Select name="status" defaultValue={status} aria-label="Status">
           <option value="">Jeder Status</option>
           {Object.entries(orderStatus).map(([v, l]) => (
             <option key={v} value={v}>
               {l}
             </option>
           ))}
-        </select>
+        </Select>
         <button className="btn btn-ghost btn-sm">Filtern</button>
       </form>
       <Card flush>

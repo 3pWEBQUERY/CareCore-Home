@@ -1,5 +1,6 @@
 "use client";
 
+import Select from "./select";
 import Link from "next/link";
 import { useActionState } from "react";
 import { submitDemoRequest } from "@/app/actions/account";
@@ -51,13 +52,13 @@ export default function ContactForm() {
       </div>
       <label>
         <span>Anzahl Plätze (optional)</span>
-        <select name="beds" defaultValue="">
+        <Select name="beds" defaultValue="">
           <option value="">Bitte wählen</option>
           <option>bis 40</option>
           <option>41–80</option>
           <option>81–150</option>
           <option>mehr als 150 / mehrere Standorte</option>
-        </select>
+        </Select>
       </label>
       <label>
         <span>Nachricht (optional)</span>

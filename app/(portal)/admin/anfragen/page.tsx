@@ -1,3 +1,4 @@
+import Select from "@/app/components/select";
 import type { Metadata } from "next";
 import { adminDemoStatus } from "@/app/actions/account";
 import SubmitButton from "@/app/components/submit-button";
@@ -52,13 +53,13 @@ export default async function RequestsPage({ searchParams }: PageProps<"/admin/a
                 </div>
                 <form action={adminDemoStatus} className="request-actions">
                   <input type="hidden" name="id" value={r.id} />
-                  <select name="status" defaultValue={r.status} aria-label="Status">
+                  <Select name="status" defaultValue={r.status} aria-label="Status">
                     {Object.entries(demoStatus).map(([v, l]) => (
                       <option key={v} value={v}>
                         {l}
                       </option>
                     ))}
-                  </select>
+                  </Select>
                   <SubmitButton className="btn btn-ghost btn-sm">Speichern</SubmitButton>
                   <SubmitButton
                     className="btn btn-danger-link"

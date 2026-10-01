@@ -1,3 +1,4 @@
+import Select from "@/app/components/select";
 import type { Metadata } from "next";
 import { createTicket } from "@/app/actions/tickets";
 import FileInput from "@/app/components/file-input";
@@ -39,36 +40,36 @@ export default async function NewTicketPage({ searchParams }: PageProps<"/konto/
           <div className="field-grid">
             <label className="field">
               <span>Kategorie</span>
-              <select name="category" defaultValue="frage">
+              <Select name="category" defaultValue="frage">
                 {Object.entries(ticketCategory).map(([value, label]) => (
                   <option key={value} value={value}>
                     {label}
                   </option>
                 ))}
-              </select>
+              </Select>
             </label>
             <label className="field">
               <span>Dringlichkeit</span>
-              <select name="priority" defaultValue="normal">
+              <Select name="priority" defaultValue="normal">
                 {Object.entries(ticketPriority).map(([value, label]) => (
                   <option key={value} value={value}>
                     {label}
                   </option>
                 ))}
-              </select>
+              </Select>
             </label>
           </div>
           {orders.length > 0 && (
             <label className="field">
               <span>Bezug zu einer Bestellung (optional)</span>
-              <select name="order_id" defaultValue="">
+              <Select name="order_id" defaultValue="">
                 <option value="">Kein Bezug</option>
                 {orders.map((o) => (
                   <option key={o.id} value={o.id}>
                     Bestellung {orderNo(o.number)}
                   </option>
                 ))}
-              </select>
+              </Select>
             </label>
           )}
           <label className="field">

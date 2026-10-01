@@ -1,3 +1,4 @@
+import Select from "@/app/components/select";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -162,10 +163,10 @@ export default async function CustomerPage({ params, searchParams }: PageProps<"
               </label>
               <label className="field">
                 <span>Rolle</span>
-                <select name="role" defaultValue={c.role} disabled={c.id === admin.id}>
+                <Select name="role" defaultValue={c.role} disabled={c.id === admin.id}>
                   <option value="customer">Kunde</option>
                   <option value="admin">Administration</option>
-                </select>
+                </Select>
                 {c.id === admin.id && <input type="hidden" name="role" value="admin" />}
               </label>
               <label className="check">

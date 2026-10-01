@@ -1,3 +1,4 @@
+import Select from "@/app/components/select";
 import type { Metadata } from "next";
 import { adminCreateOrder } from "@/app/actions/orders";
 import SubmitButton from "@/app/components/submit-button";
@@ -24,7 +25,7 @@ export default async function NewAdminOrderPage({ searchParams }: PageProps<"/ad
         <form action={adminCreateOrder} className="stack form-narrow">
           <label className="field">
             <span>Kunde</span>
-            <select name="customer_id" required defaultValue="">
+            <Select name="customer_id" required defaultValue="">
               <option value="" disabled>
                 Bitte wählen
               </option>
@@ -33,7 +34,7 @@ export default async function NewAdminOrderPage({ searchParams }: PageProps<"/ad
                   {c.organisation ? `${c.organisation} – ${c.name}` : c.name} ({c.email})
                 </option>
               ))}
-            </select>
+            </Select>
           </label>
           <label className="field">
             <span>Interne Notiz (optional)</span>

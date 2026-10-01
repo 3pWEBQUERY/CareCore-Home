@@ -1,3 +1,4 @@
+import Select from "@/app/components/select";
 import type { Metadata } from "next";
 import { adminSaveProduct } from "@/app/actions/account";
 import SubmitButton from "@/app/components/submit-button";
@@ -31,11 +32,11 @@ function ProductFields({ p }: { p?: Product }) {
         </label>
         <label className="field">
           <span>Einheit</span>
-          <select name="unit" defaultValue={p?.unit ?? "Monat"}>
+          <Select name="unit" defaultValue={p?.unit ?? "Monat"}>
             {units.map((u) => (
               <option key={u}>{u}</option>
             ))}
-          </select>
+          </Select>
         </label>
       </div>
       <label className="field">

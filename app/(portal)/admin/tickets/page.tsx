@@ -1,3 +1,4 @@
+import Select from "@/app/components/select";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Badge, Card, Empty, Flash, PageHeader } from "@/app/components/ui";
@@ -35,32 +36,32 @@ export default async function AdminTicketsPage({ searchParams }: PageProps<"/adm
       <Flash params={params} />
       <form className="filters" role="search">
         <input name="q" defaultValue={q} placeholder="Suche: Betreff, Kunde, Nummer" aria-label="Suche" />
-        <select name="ansicht" defaultValue={view === "status" ? "offen" : view} aria-label="Ansicht">
+        <Select name="ansicht" defaultValue={view === "status" ? "offen" : view} aria-label="Ansicht">
           <option value="offen">Offen</option>
           <option value="erledigt">Gelöst & geschlossen</option>
           <option value="alle">Alle</option>
-        </select>
-        <select name="status" defaultValue={status} aria-label="Status">
+        </Select>
+        <Select name="status" defaultValue={status} aria-label="Status">
           <option value="">Jeder Status</option>
           {Object.entries(ticketStatusAdmin).map(([v, l]) => (
             <option key={v} value={v}>
               {l}
             </option>
           ))}
-        </select>
-        <select name="prioritaet" defaultValue={priority} aria-label="Priorität">
+        </Select>
+        <Select name="prioritaet" defaultValue={priority} aria-label="Priorität">
           <option value="">Jede Priorität</option>
           {Object.entries(ticketPriority).map(([v, l]) => (
             <option key={v} value={v}>
               {l}
             </option>
           ))}
-        </select>
-        <select name="zustaendig" defaultValue={assignee} aria-label="Zuständig">
+        </Select>
+        <Select name="zustaendig" defaultValue={assignee} aria-label="Zuständig">
           <option value="">Alle Zuständigen</option>
           <option value="ich">Mir zugewiesen</option>
           <option value="keine">Nicht zugewiesen</option>
-        </select>
+        </Select>
         <button className="btn btn-ghost btn-sm">Filtern</button>
         {(q || status || priority || assignee || view !== "offen") && (
           <Link href="/admin/tickets" className="link-more">
