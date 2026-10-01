@@ -34,7 +34,7 @@ export default function Contact() {
               </li>
             </ul>
           </div>
-          <ContactForm email={company.email} />
+          <ContactForm />
         </div>
       </div>
     </section>

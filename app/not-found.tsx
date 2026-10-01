@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function NotFound() {
   return (
-    <section className="not-found">
+    <main className="not-found">
       <div className="container container-narrow">
         <p className="eyebrow">Fehler 404</p>
         <h1>Diese Seite gibt es nicht.</h1>
@@ -13,6 +13,6 @@ export default function NotFound() {
           Zur Startseite
         </Link>
       </div>
-    </section>
+    </main>
   );
 }

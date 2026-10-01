@@ -1,38 +1,65 @@
-# CareCore – Website
+# CareCore – Website & Kundenportal
 
-Verkaufsseite für [CareCore](https://github.com/3pWEBQUERY/CareCore), den digitalen Arbeitsplatz für die Langzeitpflege.
-Next.js (App Router) als statischer Export – das Ergebnis in `out/` läuft auf jedem Webserver oder CDN.
+Verkaufsseite, Kundenportal und Administration für [CareCore](https://github.com/3pWEBQUERY/CareCore).
+Next.js (App Router, Server Actions) mit PostgreSQL, betrieben auf Railway (Projekt **CareCore-Home**).
 
-## Seiten
+## Bereiche
 
-- `/` – Startseite: Hero mit App-Vorschau, Plattform (Kern-Diagramm), alle Module, Funktionen im Detail (Medikation &
-  BtM, Dienstplan, Bewohnerakte, Offline), Mobil & Sprachen, Sicherheit & Datenschutz, Abgrenzung (kein
-  Medizinprodukt), Schnittstellen, Einführung, Fragen, Kontakt.
-- `/impressum/` – Impressum
-- `/datenschutz/` – Datenschutzerklärung der Website (DSG, soweit anwendbar DSGVO)
+| Pfad                                                | Inhalt                                                                                                                                                                |
+| --------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `/`                                                 | Verkaufsseite mit allen Modulen, Sicherheit, Einführung, FAQ und Formular „Demo vereinbaren“                                                                          |
+| `/impressum`, `/datenschutz`                        | Rechtliches                                                                                                                                                           |
+| `/registrieren`, `/anmelden`, `/passwort-vergessen` | Kundenkonto                                                                                                                                                           |
+| `/konto`                                            | Kundenportal: Übersicht, Support-Tickets (mit Anhängen), Bestellungen, Rechnungen (Druck/PDF), Profil & Geräte                                                        |
+| `/admin`                                            | Administration: Übersicht, Tickets (Status, Priorität, Zuweisung, interne Notizen), Demo-Anfragen, Kundschaft, Bestellungen, Rechnungen, Produkte & Preise, Protokoll |
+| `/api/health`                                       | Zustand von App und Datenbank (für Railway)                                                                                                                           |
 
-## Vor der Veröffentlichung
+## Tickets
 
-1. In `lib/site.ts` alle Platzhalter in eckigen Klammern ersetzen: Firmenname, Rechtsform, Adresse, UID,
-   Handelsregister, vertretungsberechtigte Person, E-Mail, Telefon, Erreichbarkeit und Hosting-Anbieter der Website.
-   Impressum, Datenschutz, Kontakt und Fusszeile lesen alle von dort.
-2. `NEXT_PUBLIC_SITE_URL` auf die öffentliche Adresse setzen (z. B. `https://www.carecore.ch`) – für Sitemap,
-   `robots.txt` und Vorschaubilder.
-3. Impressum und Datenschutzerklärung rechtlich prüfen lassen.
+- Status: Offen → In Bearbeitung → Wartet auf Kunde → Gelöst → Geschlossen. Antwortet die Kundschaft auf ein Ticket
+  „Wartet auf Kunde“ oder „Gelöst“, steht es wieder auf „Offen“.
+- Interne Notizen sieht nur die Administration; Anhänge interner Notizen ebenso.
+- Anhänge: bis 3 Dateien à 5 MB (PDF, PNG, JPG, TXT, CSV, DOCX, XLSX), am Inhalt geprüft, in der Datenbank gespeichert,
+  nur für Berechtigte abrufbar.
+- Jede Änderung (Status, Priorität, Kategorie, Zuweisung) steht im Verlauf des Tickets.
 
-Die Inhalte beschreiben den Funktionsumfang des CareCore-Repositorys (Stand 1. Oktober 2026). Ändert sich die App,
-Module in `lib/modules.tsx` und die Detailtexte in `app/components/` nachführen. Alle Aussagen halten sich an den
-MepV-Entscheid der App: keine Diagnosen, keine Dosierungen, keine eigenen Behandlungsempfehlungen.
+## Bestellungen & Rechnungen
+
+Die Administration pflegt unter **Produkte & Preise** das Angebot. Kundschaft bestellt daraus im Portal (Status
+„Angefragt“), die Administration bestätigt, ergänzt Positionen und erstellt die Rechnung. Rechnungen sind
+unveränderliche Momentaufnahmen (Adresse, Positionen, Beträge) mit Nummer `RE-JJJJ-00001`, MWST je Satz,
+Zahlungsfrist und Bankverbindung. Status: offen, bezahlt (mit Datum), storniert.
+
+## Datenbank
+
+Schema in `database/migrations/*.sql`, angewendet von `npm run db:migrate` (Prüfsumme je Datei, eine Transaktion pro
+Datei). Auf Railway läuft das als Pre-Deploy-Befehl. Beim ersten Lauf entsteht das Administrationskonto aus
+`CARECORE_ADMIN_EMAIL` und `CARECORE_ADMIN_PASSWORD` (mind. 12 Zeichen); weitere Administratoren ernennt man unter
+Administration › Kundschaft.
+
+## Umgebungsvariablen
+
+| Variable                                                            | Pflicht | Zweck                                                                               |
+| ------------------------------------------------------------------- | ------- | ----------------------------------------------------------------------------------- |
+| `DATABASE_URL`                                                      | ja      | Railway: `${{Postgres.DATABASE_URL}}`                                               |
+| `CARECORE_ADMIN_EMAIL`, `CARECORE_ADMIN_PASSWORD`                   | ja      | erstes Administrationskonto                                                         |
+| `NEXT_PUBLIC_SITE_URL`, `APP_URL`                                   | ja      | öffentliche Adresse (Sitemap, Links in E-Mails)                                     |
+| `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASSWORD`, `MAIL_FROM` | nein    | E-Mails: neue Tickets/Antworten, Bestellungen, Rechnungen, „Passwort vergessen“     |
+| `NOTIFY_EMAIL`                                                      | nein    | zusätzliche Empfänger für Benachrichtigungen an die Administration (Komma-getrennt) |
+
+Ohne SMTP läuft alles, nur ohne E-Mails; Passwörter setzt dann die Administration neu (Kundschaft › Konto › Passwort).
+
+## Vor dem Livegang
+
+1. In `lib/site.ts` die Platzhalter in eckigen Klammern ersetzen (Firma, Adresse, UID, MWST-Nr., Bank, IBAN …).
+2. Impressum und Datenschutzerklärung rechtlich prüfen lassen.
+3. Produkte & Preise in der Administration anlegen.
 
 ## Entwicklung
 
 ```bash
 npm install
-npm run dev      # http://localhost:3000
-npm run lint
-npm run build    # schreibt die statische Website nach out/
-npm start        # liefert out/ lokal aus
+DATABASE_URL=postgres://… npm run db:migrate
+DATABASE_URL=postgres://… npm run dev
+npm run lint && npm run build
 ```
-
-Die Website setzt keine Cookies, lädt keine externen Skripte und liefert Schriften selbst aus (`next/font`). Das
-Kontaktformular öffnet das E-Mail-Programm mit einer vorbereiteten Anfrage und speichert nichts.

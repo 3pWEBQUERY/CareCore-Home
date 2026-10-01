@@ -6,7 +6,9 @@ import { List, X } from "@phosphor-icons/react";
 import { nav } from "@/lib/site";
 import Brand from "./brand";
 
-export default function SiteHeader() {
+type Account = { name: string; href: string } | null;
+
+export default function SiteHeader({ account }: { account: Account }) {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -36,6 +38,15 @@ export default function SiteHeader() {
           ))}
         </nav>
         <div className="header-actions">
+          {account ? (
+            <Link href={account.href} className="header-login">
+              Mein Konto
+            </Link>
+          ) : (
+            <Link href="/anmelden" className="header-login">
+              Anmelden
+            </Link>
+          )}
           <Link href="/#kontakt" className="btn btn-primary btn-sm">
             Demo vereinbaren
           </Link>
@@ -57,6 +68,9 @@ export default function SiteHeader() {
             {item.label}
           </Link>
         ))}
+        <Link href={account ? account.href : "/anmelden"} onClick={() => setOpen(false)}>
+          {account ? "Mein Konto" : "Anmelden"}
+        </Link>
         <Link href="/#kontakt" className="btn btn-primary" onClick={() => setOpen(false)}>
           Demo vereinbaren
         </Link>

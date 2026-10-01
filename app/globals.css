@@ -2749,3 +2749,41 @@ textarea {
     background: #fff;
   }
 }
+
+.header-login {
+  padding: 8px 14px;
+  border-radius: 999px;
+  color: var(--ink);
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+}
+.header-login:hover {
+  background: rgba(37, 99, 235, 0.08);
+  color: var(--brand-dark);
+}
+@media (max-width: 960px) {
+  .header-actions .header-login {
+    display: none;
+  }
+}
+
+.hp {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+.contact-done {
+  align-content: center;
+  min-height: 320px;
+  text-align: center;
+}
+.contact-done-title {
+  font-size: 22px;
+  font-weight: 600;
+}
+.contact-done p:not(.contact-done-title) {
+  color: var(--muted);
+}

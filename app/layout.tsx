@@ -1,9 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import SiteFooter from "./components/site-footer";
-import SiteHeader from "./components/site-header";
 import { site } from "@/lib/site";
 import "./globals.css";
+import "./portal.css";
 
 // next/font lädt die Schriften beim Build und liefert sie selbst aus – kein Aufruf bei Google im Browser.
 const geistSans = Geist({ variable: "--font-sans", subsets: ["latin"] });
@@ -35,14 +34,7 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="de-CH" className={`${geistSans.variable} ${geistMono.variable}`}>
-      <body>
-        <a className="skip-link" href="#inhalt">
-          Zum Inhalt springen
-        </a>
-        <SiteHeader />
-        <main id="inhalt">{children}</main>
-        <SiteFooter />
-      </body>
+      <body>{children}</body>
     </html>
   );
 }

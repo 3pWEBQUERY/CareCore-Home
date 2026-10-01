@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import LegalPage from "../components/legal-page";
+import LegalPage from "@/app/components/legal-page";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -38,14 +38,14 @@ export default function DatenschutzPage() {
       <section>
         <h2>2. Kurz zusammengefasst</h2>
         <ul>
-          <li>Diese Website setzt keine Cookies und verwendet keine Analyse- oder Tracking-Dienste.</li>
+          <li>Wir verwenden keine Analyse-, Werbe- oder Tracking-Dienste.</li>
+          <li>
+            Ein Cookie setzen wir nur, wenn Sie sich im Kundenportal anmelden: ein technisch notwendiges Sitzungs-Cookie
+            („cch_session“, 14 Tage), das beim Abmelden gelöscht wird.
+          </li>
           <li>
             Schriften und Symbole werden von unserem Server ausgeliefert – es werden keine Anfragen an Google oder
             andere Schriftanbieter gestellt.
-          </li>
-          <li>
-            Das Kontaktformular speichert nichts: Es öffnet Ihr eigenes E-Mail-Programm mit einer vorbereiteten
-            Nachricht.
           </li>
           <li>Wir verkaufen keine Personendaten und geben sie nicht zu Werbezwecken weiter.</li>
         </ul>
@@ -69,15 +69,32 @@ export default function DatenschutzPage() {
       <section>
         <h2>4. Kontaktaufnahme</h2>
         <p>
-          Wenn Sie uns per E-Mail oder Telefon kontaktieren – auch über das Kontaktformular, das eine E-Mail in Ihrem
-          Mailprogramm vorbereitet –, bearbeiten wir die mitgeteilten Angaben (z. B. Name, Einrichtung, Funktion,
-          E-Mail-Adresse, Telefonnummer und Inhalt der Anfrage), um Ihre Anfrage zu beantworten und eine Demo zu
-          organisieren. Rechtsgrundlage nach DSGVO sind vorvertragliche Massnahmen (Art. 6 Abs. 1 lit. b DSGVO) und
-          unser berechtigtes Interesse an der Beantwortung von Anfragen (Art. 6 Abs. 1 lit. f DSGVO).
+          Wenn Sie uns per E-Mail, Telefon oder über das Formular „Demo vereinbaren“ kontaktieren, bearbeiten wir die
+          mitgeteilten Angaben (z. B. Name, Einrichtung, Funktion, E-Mail-Adresse, Telefonnummer und Inhalt der
+          Anfrage), um Ihre Anfrage zu beantworten und eine Demo zu organisieren. Rechtsgrundlage nach DSGVO sind
+          vorvertragliche Massnahmen (Art. 6 Abs. 1 lit. b DSGVO) und unser berechtigtes Interesse an der Beantwortung
+          von Anfragen (Art. 6 Abs. 1 lit. f DSGVO).
         </p>
         <p>
           Wir bewahren Anfragen auf, solange es für die Bearbeitung nötig ist, und löschen sie danach, sofern keine
           gesetzlichen Aufbewahrungspflichten bestehen oder ein Vertrag zustande kommt.
+        </p>
+      </section>
+
+      <section>
+        <h2>4a. Kundenportal</h2>
+        <p>
+          Für das Kundenportal speichern wir die Angaben Ihres Kontos (Name, Einrichtung, Funktion, E-Mail-Adresse,
+          Telefon, Rechnungsadresse und ein Passwort, das nur als Hash abgelegt wird), Ihre Support-Tickets mit
+          Nachrichten und Anhängen, Bestellungen und Rechnungen sowie technische Angaben zu Ihren Anmeldungen
+          (Zeitpunkt, Browser und Gerät). Zum Schutz vor Missbrauch halten wir Anmeldeversuche kurzzeitig fest.
+          Änderungen an Konten, Bestellungen und Rechnungen werden protokolliert.
+        </p>
+        <p>
+          Zweck ist die Erbringung unserer Leistungen, der Support und die Abrechnung. Rechtsgrundlage nach DSGVO ist
+          die Vertragserfüllung (Art. 6 Abs. 1 lit. b DSGVO). Rechnungen bewahren wir so lange auf, wie es gesetzliche
+          Aufbewahrungspflichten verlangen. Bitte schreiben Sie in Tickets keine Gesundheitsdaten von Bewohnerinnen und
+          Bewohnern.
         </p>
       </section>
 

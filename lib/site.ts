@@ -16,6 +16,9 @@ export const site = {
     email: "[kontakt@ihre-domain.ch]",
     phone: "[+41 00 000 00 00]",
     hours: "[Mo–Fr, 08:00–17:00]",
+    vatNo: "[CHE-000.000.000 MWST]",
+    bank: "[Bank, Ort]",
+    iban: "[CH00 0000 0000 0000 0000 0]",
   },
   // Wo diese Website (nicht die Pflegesoftware) betrieben wird.
   websiteHost: "[Hosting-Anbieter der Website, Sitz, Land]",

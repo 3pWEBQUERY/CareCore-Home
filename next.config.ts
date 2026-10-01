@@ -1,10 +1,25 @@
 import type { NextConfig } from "next";
 
-// Statische Website: `next build` schreibt alle Seiten nach `out/` (beliebiger Webserver oder CDN).
 const nextConfig: NextConfig = {
-  output: "export",
-  trailingSlash: true,
-  images: { unoptimized: true },
+  poweredByHeader: false,
+  experimental: {
+    // Ticket-Anhänge: bis zu 3 Dateien à 5 MB
+    serverActions: { bodySizeLimit: "16mb" },
+  },
+  async headers() {
+    return [
+      {
+        source: "/:path*",
+        headers: [
+          { key: "X-Frame-Options", value: "DENY" },
+          { key: "X-Content-Type-Options", value: "nosniff" },
+          { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
+          { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=()" },
+          { key: "Strict-Transport-Security", value: "max-age=31536000; includeSubDomains" },
+        ],
+      },
+    ];
+  },
 };
 
 export default nextConfig;
